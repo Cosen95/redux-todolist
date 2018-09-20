@@ -34,10 +34,10 @@ class TodoList extends Component{
                  style={{ width:300, marginRight:10}}
                  onChange={this.handleInputChange}
                 />
-                <Button type="primary" onClick={this.handleSubmit}>提交</Button>
+                <Button type="primary" onClick={this.handleSubmit}>添加</Button>
             </div>
             <List
-                style={{ width:500 }}
+                style={{ width:600 }}
                 dataSource={this.state.list}
                 renderItem={item => (<List.Item>{item}</List.Item>)}
             />
