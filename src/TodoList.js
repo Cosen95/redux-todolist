@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import 'antd/dist/antd.css';
-import { getInputChangeAction, getAddItemAction, getDeleteItemAction, getInitList } from './store/actionCreators';
+import { getInputChangeAction, getAddItemAction, getDeleteItemAction, getInitSagaList } from './store/actionCreators';
 import TodoListUI from './TodoListUI';
 import axios from './axios/index'
 
@@ -15,7 +15,11 @@ class TodoList extends Component{
 
     }
     componentDidMount(){
-        this.getItemList();
+        const action = getInitSagaList();
+        store.dispatch(action);
+        // this.getItemList();
+        // const action = getTodoList();
+        // store.dispatch(action);
     }
     handleInputChange = (e)=> {
         const action = getInputChangeAction(e.target.value);
@@ -32,22 +36,22 @@ class TodoList extends Component{
         const action = getDeleteItemAction(index);
         store.dispatch(action);
     }
-    getItemList = ()=> {
-        axios.ajax({
-            url: '/itemList',
-            method: 'get',
-            data:{
-                params:{ id:156 }
-            }
-        }).then((res) => {
-            const newArr = [];
-            res.data.item_list.map(item => {
-                newArr.push(item.name);
-            })
-            const action = getInitList(newArr);
-            store.dispatch(action);
-        })
-    }
+    // getItemList = ()=> {
+    //     axios.ajax({
+    //         url: '/itemList',
+    //         method: 'get',
+    //         data:{
+    //             params:{ id:156 }
+    //         }
+    //     }).then((res) => {
+    //         const newArr = [];
+    //         res.data.item_list.map(item => {
+    //             newArr.push(item.name);
+    //         })
+    //         const action = getInitList(newArr);
+    //         store.dispatch(action);
+    //     })
+    // }
     render(){
         return(
             <TodoListUI 

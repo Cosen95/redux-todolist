@@ -20,7 +20,7 @@ export default class Axios{
                     } else {
                         Modal.info({
                             title: '提示',
-                            content: res.msg
+                            content: '服务繁忙，请稍后重试'
                         })
                     }
                 } else {
